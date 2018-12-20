@@ -1,9 +1,14 @@
 {
   "name": "i_shop",
   "version": "1.0.0",
-  "description": "Ecommerce Demo Site",
+  "description": "Server side for iShop app, Ecommerce Demo Site",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev":"npm-run-all --parallel dev:*",
+    "dev:server": "nodemon index.js",
+    "dev:client": "npm start --prefix client",
+    "bundle": "npm run bundle --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
