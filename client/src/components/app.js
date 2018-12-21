@@ -3,15 +3,19 @@ import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize';
 import AccountRoutes from './account';
 import { Route, Switch } from 'react-router-dom';
+import NotFound from './general/404';
+import Nav from './nav';
 
 
 const App = () => (
     <div>
-        <div className="container">
-            <Switch>
-                <Route path = "/account" component = {AccountRoutes}/>
-            </Switch>
-        </div>
+        <Nav/>
+            <div className="container">
+                <Switch>
+                    <Route path = "/account" component = {AccountRoutes}/>
+                    <Route component = {NotFound}/>
+                </Switch>
+            </div>
     </div>
 );
 
