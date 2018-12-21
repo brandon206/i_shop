@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "description": "Client side for iShop app, Ecommerce Demo Site",
   "main": "index.js",
+  "proxy": {
+    "/api/*": {
+      "target":"http://localhost:9000"
+    },
+    "/auth/*":{
+      "target":"http://localhost:9000"
+    }
+  },
   "scripts": {
-    "dev":"npm run dev --prefix ..",
+    "dev": "npm run dev --prefix ..",
     "start": "node dev_server.js",
     "bundle": "webpack --config webpack.prod.js --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,10 +24,14 @@
     "url": "https://github.com/brandon206/i_shop"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "materialize-css": "^1.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
-    "redux": "^4.0.1"
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-form": "^8.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
