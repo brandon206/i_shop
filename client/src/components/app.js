@@ -1,9 +1,17 @@
 import React from 'react';
-import Test from './test';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize';
+import AccountRoutes from './account';
+import { Route, Switch } from 'react-router-dom';
+
 
 const App = () => (
     <div>
-        <Test/>
+        <div className="container">
+            <Switch>
+                <Route path = "/account" component = {AccountRoutes}/>
+            </Switch>
+        </div>
     </div>
 );
 
