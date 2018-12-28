@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import "./nav.scss";
+
+import Sidenav from './side_nav';
 
 class Nav extends Component {
     state = {
@@ -36,8 +38,22 @@ class Nav extends Component {
         ]
     }
 
+    componentDidMount () {
+        this.sideNav = M.Sidenav.init(this.sideNav);
+    }
+
+    setSideNavRef = (element) => {
+        this.sideNav = element;
+    }
+
     renderSignOut () {
         return <button className = "btn red lighten-1" onClick = { ()=> console.log("Sign out clicked") } >Sign Out</button>
+    }
+
+    handleLinkClick = () => {
+        if(this.sideNav.isOpen){
+            this.sideNav.close();
+        }
     }
 
     buildLink(link) {
@@ -48,7 +64,7 @@ class Nav extends Component {
         );
     }
 
-    renderLinks () {
+    renderLinks = () => {
         const auth = true;
         let authLinks = [];
 
@@ -58,8 +74,7 @@ class Nav extends Component {
 
         if(auth){
             authLinks = navAuth.map(this.buildLink);
-            authLinks.push(<li key = "/sign-out">{this.renderSignOut()}</li>);
-            console.log("authlinks: ", authLinks);
+            authLinks.push(<li className = "sign-out" key = "/sign-out">{this.renderSignOut()}</li>);
             } else {
                 authLinks = nonAuth.map(this.buildLink);
             }
@@ -70,14 +85,21 @@ class Nav extends Component {
 
     render () {
         return (
-            <nav className = "green lighten-1">
-                <div className="nav-wrapper">
-                    <Link className = "brand-logo" to ="/">iShop</Link>
-                    <ul className = "right">
-                        {this.renderLinks()}
-                    </ul>
-                </div>
-            </nav>
+            <Fragment>
+                <nav className = "green lighten-1">
+                    <div className="nav-wrapper">
+                        <Link className = "brand-logo" to ="/">iShop</Link>
+                        <Link to="#" data-target = "side-nav" className = "sidenav-trigger">
+                            <i className="material-icons">menu</i>
+                        </Link>
+                        <ul className = "right hide-on-med-and-down">
+                            {this.renderLinks()}
+                        </ul>
+                    </div>
+                </nav>
+
+                <Sidenav setRef = {this.setSideNavRef} renderLinks = {this.renderLinks}/>
+            </Fragment>
         );
     }
 }
