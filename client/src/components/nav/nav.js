@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import "./nav.scss";
 
 class Nav extends Component {
     state = {
@@ -34,10 +36,48 @@ class Nav extends Component {
         ]
     }
 
+    renderSignOut () {
+        return <button className = "btn red lighten-1" onClick = { ()=> console.log("Sign out clicked") } >Sign Out</button>
+    }
+
+    buildLink(link) {
+        return (
+            <li key = {link.to}>
+                <Link to = {link.to}>{link.text}</Link>
+            </li>
+        );
+    }
+
+    renderLinks () {
+        const auth = true;
+        let authLinks = [];
+
+        const { auth: navAuth, common, nonAuth } = this.state;
+
+        const commonLinks = common.map(this.buildLink);
+
+        if(auth){
+            authLinks = navAuth.map(this.buildLink);
+            authLinks.push(<li key = "/sign-out">{this.renderSignOut()}</li>);
+            console.log("authlinks: ", authLinks);
+            } else {
+                authLinks = nonAuth.map(this.buildLink);
+            }
+            //concatenates the two arrays together
+            return [...commonLinks, ...authLinks];
+    }
+
 
     render () {
         return (
-            <nav className = "green lighten-1"></nav>
+            <nav className = "green lighten-1">
+                <div className="nav-wrapper">
+                    <Link className = "brand-logo" to ="/">iShop</Link>
+                    <ul className = "right">
+                        {this.renderLinks()}
+                    </ul>
+                </div>
+            </nav>
         );
     }
 }
