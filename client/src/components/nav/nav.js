@@ -65,7 +65,7 @@ class Nav extends Component {
     }
 
     renderLinks = () => {
-        const auth = true;
+        const auth = false;
         let authLinks = [];
 
         const { auth: navAuth, common, nonAuth } = this.state;
