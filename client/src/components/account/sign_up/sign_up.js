@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Form from './form';
 
+import Form from './form';
+import { signUp } from '../../../actions';
 
 class SignUp extends Component {
     handleSignUp = values => {
         console.log("Sign Up Submitted with: ", values);
+
+        this.props.signUp(values);
     }
     render () {
         return (
@@ -17,4 +20,8 @@ class SignUp extends Component {
     }
 }
 
-export default connect (null, {})(SignUp);
+
+
+export default connect (null, {
+    signUp
+})(SignUp);
