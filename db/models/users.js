@@ -63,8 +63,8 @@ module.exports = (db, userStatuses, userTypes) => {
     Users.prototype.comparePasswords = function (candidatePassword){
         return new Promise ((resolve, reject) => {
             bcrypt.compare(candidatePassword, this.password, (error, isMatch) => {
-                if(err){
-                    return reject(err);
+                if(error){
+                    return reject(error);
                 }
                 resolve(isMatch);
             });
